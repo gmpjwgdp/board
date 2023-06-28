@@ -1,0 +1,58 @@
+<div id='content1'>
+      <%= form_for @topic do |f| %>
+      <!--<% if @topic.errors.any? %>-->
+      <!--  <div id="error_explanation" class="alert alert-danger">-->
+      <!--    <ul>-->
+      <!--    <% @topic.errors.full_messages.each do |message| %>-->
+      <!--      <li><%= message %></li>-->
+      <!--    <% end %>-->
+      <!--    </ul>-->
+      <!--  </div>-->
+      <!--<% end %>-->
+      <!-- 表示・非表示ボタン -->
+      <p class="openBtn"><i class="fa fa-chevron-down faColor">　</i>掲示板を作る</p>
+      <!-- 説明文 -->
+      <p class="textArea">
+        タイトル:<%= f.text_field :title , maxlength:"20" %>
+        簡単な内容:<%= f.text_field :simplecontent , maxlength:"20"%>
+        活動時間:<%= f.text_field :date , maxlength:"20"%>
+        備考欄:<%= f.text_field :content , maxlength:"20"%>
+      <!--<%= f.select :tag, ['サークル・部活', '教科書譲渡'], {include_blank: 'スレッドのタグを選択してください'} %>-->
+      <%= f.hidden_field :tag,:value => 'サークル・部活'  %>
+      <%= f.submit value="スレッドを作成" ,class:"submit"%><br>
+      <% end %>
+      </p>
+      <% @topics_circle.each do |tpc| %>
+        <!--<% if tpc.tag == "サークル・部活" %>-->
+        <div class ="threads">
+          <a><%= link_to("#{tpc.title}(#{Message.where(topic_id: tpc.id).count})" , "/topics/#{tpc.id}/messages/index") %></a>
+          <ul>
+            <% if tpc.simplecontent %>
+              <li>簡単な内容▷<%= tpc.simplecontent %></li>
+            <% else %>
+              <li>簡単な内容▷</li>
+            <% end %>
+            <% if tpc.date %>
+              <li>活動時間▷<%= tpc.date %></li>
+              <% else %>
+              <li>活動時間▷</li>
+            <% end %>
+            <% if tpc.content %>
+              <li>備考欄▷<%= tpc.content %></li>
+            <% else %>
+              <li>備考欄▷</li>
+            <% end %>
+          </ul>
+          <p class = "time">🐣<%= time_ago_in_words(tpc.created_at) %> ago</p>
+        </div>
+          <br>
+          <% @cnt+= 1 %>
+        <!--<% end %>-->
+      <% end %>
+      <% if @cnt == 0 %>
+        <p>スレッドがありません</p>
+      <% end %>
+      <div id = "page">
+        <%= paginate @topics_circle,data: {"turbolinks" => false},class:"paginate",param_name: 'circle' %>
+      </div>
+    </div>

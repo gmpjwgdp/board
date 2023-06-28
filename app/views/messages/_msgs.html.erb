@@ -1,0 +1,10 @@
+<div class = "msg">
+  <% @messages.each do |msg| %>
+  <div class = "a_msg">
+    <p class = "name"><%= @count -= 1 %> <%= msg.title %>(<%= msg.created_at %>) </p>
+    <p class = "msg_cont"><%= msg.body %></p>
+    <p class = "time"><%= time_ago_in_words(msg.created_at) %> ago</p>
+    <hr>
+  </div>
+<% end %>
+</div>

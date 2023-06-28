@@ -1,0 +1,14 @@
+<% provide(:title, @topic.title) %>
+<%= render "header" %>
+<%= render "form" %>
+<hr>
+<%= render "msgs" %>
+</div>
+
+<!--<hr>-->
+
+
+
+
+
+<%= link_to("スレッド一覧に戻る" , "/topics" , data: {"turbolinks" => false}) %>

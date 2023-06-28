@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./asset/bootstrap-tab.js"></script>
+    <meta name = "Description" content="OGUBBSは大阪学院大学のスマートフォン向け電子掲示板です。サークル、或いは部活の勧誘、教科書の譲渡が行えます。"/>
+    <meta name="google-site-verification" content="yaX90F1UsexgeicSw6Is-hecHFjIsqWM0z_IXhe4XUU" />
+  </head>
+
+  <body>
+    <header>
+      <div class = "flash">
+        <%= flash[:danger] %>
+      </div>
+      <h1><img src="/assets/logo2.png" alt="">OGUBBS</h1>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <div class ="footer_img"><img src="/assets/logo2.png" alt=""></div>
+      <div class="copyright">Copyright © 2020 OGU Student All Rights Reserved.</div>
+    </footer>
+  </body>
+</html>

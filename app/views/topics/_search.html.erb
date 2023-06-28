@@ -1,0 +1,8 @@
+<div class = "search">
+  <%= form_tag(topics_path, :method => "get") do %>
+   <%= text_field_tag :search ,'', class: 'search_container',placeholder:"　キーワード検索",type:"text"%> 
+   <%= button_tag :type => "submit",class: 'search_submit'  do %>
+    <%= fa_icon("search") %>
+   <% end %>
+  <% end %>
+</div>

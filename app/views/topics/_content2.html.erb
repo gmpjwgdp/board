@@ -1,0 +1,57 @@
+<div id='content2'>
+    <%= form_for @topic do |f| %>
+      <!--<% if @topic.errors.any? %>-->
+      <!--  <div id="error_explanation" class="alert alert-danger">-->
+      <!--    <ul>-->
+      <!--    <% @topic.errors.full_messages.each do |message| %>-->
+      <!--      <li><%= message %></li>-->
+      <!--    <% end %>-->
+      <!--    </ul>-->
+      <!--  </div>-->
+      <!--<% end %>-->
+      <!-- 表示・非表示ボタン -->
+      <p class="openBtn"><i class="fa fa-chevron-down faColor">　</i>掲示板を作る</p>
+      <!-- 説明文 -->
+      <p class="textArea">
+        タイトル:<%= f.text_field :title , maxlength:"20"%>
+        希望価格(半角数字)<%= f.text_field :price , maxlength:"20", type:"number"%>
+        本の状態<%= f.text_field :bookstatus , maxlength:"20"%>
+        売りたい？買いたい？<%= f.select :side, ['売', '買'], {include_blank: '立場を選択してください'} %>
+        <%= f.hidden_field :tag,:value => '参考書譲渡'  %>
+        <%= f.submit value="スレッドを作成" ,class:"submit"%><br>
+        <% end %>
+      </p>
+      <% @topics_books.each do |tpc| %>
+        <!--<% if tpc.tag == "参考書譲渡" %>-->
+        <div class="threads">
+          <a><%= link_to("#{tpc.title}(#{Message.where(topic_id: tpc.id).count})" , "/topics/#{tpc.id}/messages/index") %></a>
+          <ul>
+            <% if tpc.price %>
+              <li>価格▷<%= tpc.price %>円</li>
+            <% else %>
+              <li>価格▷</li>
+            <% end %>
+            <% if tpc.bookstatus %>
+              <li>本の状態▷<%= tpc.bookstatus %></li>
+              <% else %>
+              <li>本の状態▷</li>
+            <% end %>
+            <% if tpc.side %>
+              <li>立場▷<%= tpc.side %></li>
+            <% else %>
+              <li>立場▷</li>
+            <% end %>
+          </ul>
+          <p class = "time">🐣<%= time_ago_in_words(tpc.created_at) %> ago</p>
+        </div>
+          <br>
+          <% @cnt_2 += 1 %>
+        <!--<% end %>-->
+      <% end %>
+      <% if @cnt_2 == 0 %>
+        <p>スレッドがありません</p>
+      <% end %>
+      <div id = "page">
+        <%= paginate @topics_books,data: {"turbolinks" => false},class:"paginate",param_name: 'books' %>
+      </div>
+    </div>

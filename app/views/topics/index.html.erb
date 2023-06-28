@@ -1,0 +1,13 @@
+<% provide(:title) %>
+<div class='multipletab'>
+  <div class='tab-buttons'>
+    <span id='content1'>サークル・部活</span>
+    <span id='content2'>参考書譲渡</span>
+    <!--add more button right after it with same id attribute of that container. Make sure to use span tag.-->
+  </div>
+  <%= render "search" %>
+  <div class='tab-content'>
+    <%= render "content1" %>
+    <%= render "content2" %>
+  </div>
+</div>

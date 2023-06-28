@@ -1,0 +1,17 @@
+<div class = "form">
+  <%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <% @message.errors.full_messages.each do |err| %>
+      <font color="red"><%= err %></font><br>
+    <% end %>
+  <% end %>
+
+  <div><%= f.text_field :title , value: "ogu太郎" ,class: "msg_input"%></div>
+  <%= f.hidden_field :topic_id %>
+  <%= f.hidden_field :ip %>
+  <!--<div><%= f.text_field :topic_id %></div>-->
+  <div><%= f.text_area :body , placeholder: "内容" %></div>
+  
+  <%= f.submit value="作成",class: "msg_submit"%><br>
+<% end %>
+</div>
